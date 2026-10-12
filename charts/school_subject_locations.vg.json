@@ -59,7 +59,7 @@
   "layer": [
     {
       "data": {
-        "url": "../data/queensland_regions.json",
+        "url": "data/queensland_regions.json",
         "format": {
           "type": "json",
           "property": "features"
@@ -86,7 +86,7 @@
 
     {
       "data": {
-        "url": "../data/school_locations.json",
+        "url": "data/school_locations.json",
         "format": {
           "type": "json",
           "property": "values"
@@ -110,7 +110,7 @@
           "lookup": "SchoolCode",
           "from": {
             "data": {
-              "url": "../data/qcaa_school_subjects_2025.csv",
+              "url": "data/qcaa_school_subjects_2025.csv",
               "format": {
                 "type": "csv",
                 "parse": {

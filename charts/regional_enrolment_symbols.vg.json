@@ -57,7 +57,7 @@
   ],
 
   "data": {
-    "url": "../data/queensland_regions.json",
+    "url": "data/queensland_regions.json",
     "format": {
       "type": "json",
       "property": "features"
@@ -102,7 +102,7 @@
           "lookup": "Region",
           "from": {
             "data": {
-              "url": "../data/qcaa_region_subjects_2025.csv",
+              "url": "data/qcaa_region_subjects_2025.csv",
               "format": {
                 "type": "csv"
               }

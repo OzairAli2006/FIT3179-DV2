@@ -10,7 +10,7 @@
   },
 
   "data": {
-    "url": "../data/acara_gender_gap_trends.csv",
+    "url": "data/acara_gender_gap_trends.csv",
     "format": {
       "type": "csv",
       "parse": {

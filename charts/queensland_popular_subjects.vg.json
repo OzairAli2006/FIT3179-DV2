@@ -10,7 +10,7 @@
   },
 
   "data": {
-    "url": "../data/qcaa_popular_subjects_2025.csv",
+    "url": "data/qcaa_popular_subjects_2025.csv",
     "format": {
       "type": "csv",
       "parse": {

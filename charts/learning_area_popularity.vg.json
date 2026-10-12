@@ -10,7 +10,7 @@
   },
 
   "data": {
-    "url": "../data/acara_learning_area_2024.csv",
+    "url": "data/acara_learning_area_2024.csv",
     "format": {
       "type": "csv",
       "parse": {

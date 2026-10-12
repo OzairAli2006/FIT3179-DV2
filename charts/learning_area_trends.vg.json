@@ -10,7 +10,7 @@
   },
 
   "data": {
-    "url": "../data/acara_learning_area_trends.csv",
+    "url": "data/acara_learning_area_trends.csv",
     "format": {
       "type": "csv",
       "parse": {"Year": "number", "Participation": "number"}
