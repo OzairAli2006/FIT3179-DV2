@@ -1,0 +1,120 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "What are Australian Year 12 students choosing?",
+    "subtitle": "Participation by learning area in 2024",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/acara_learning_area_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Proportion of Enrolments": "number"
+      }
+    }
+  },
+
+  "width": 340,
+  "height": 360,
+
+  "encoding": {
+    "y": {
+      "field": "LearningArea",
+      "type": "nominal",
+      "sort": [
+        "English",
+        "Mathematics",
+        "Society and Environment",
+        "Science",
+        "Technology",
+        "Health and Physical Education",
+        "Arts",
+        "Languages other than English"
+      ],
+      "title": null,
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 190,
+        "ticks": false,
+        "domain": false
+      }
+    },
+
+    "x": {
+      "field": "Proportion of Enrolments",
+      "type": "quantitative",
+      "title": "Year 12 participation (%)",
+      "scale": {"domain": [0, 85]},
+      "axis": {
+        "grid": true,
+        "gridColor": "#E6E6E6",
+        "tickCount": 5,
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "bar",
+        "size": 3,
+        "color": "#4F81BD"
+      }
+    },
+
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 120,
+        "color": "#4F81BD"
+      },
+
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "LearningArea",
+            "type": "nominal",
+            "title": "Learning area"
+          },
+          {
+            "field": "Proportion of Enrolments",
+            "type": "quantitative",
+            "title": "Participation (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 8,
+        "fontSize": 11,
+        "color": "#333333"
+      },
+
+      "encoding": {
+        "text": {
+          "field": "Proportion of Enrolments",
+          "type": "quantitative",
+          "format": ".1f"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "view": {"stroke": null}
+  }
+}

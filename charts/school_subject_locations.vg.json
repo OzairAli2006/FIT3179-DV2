@@ -1,0 +1,219 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Where Is the Subject Being Studied?",
+    "subtitle": [
+      "Queensland senior subject Unit 4 enrolments in 2025",
+      "Each dot represents a school with enrolments in the selected subject"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "width": 420,
+  "height": 500,
+
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-10, -28],
+    "rotate": [-145, 0, 0]
+  },
+
+  "params": [
+    {
+      "name": "selectedSubject",
+      "value": "Biology",
+      "bind": {
+        "input": "select",
+        "options": [
+          "English",
+          "GeneralMathematics",
+          "EssentialEnglish",
+          "EssentialMathematics",
+          "Biology",
+          "MathematicalMethods",
+          "Chemistry",
+          "SportRecreation",
+          "Physics",
+          "ReligionEthics"
+        ],
+        "labels": [
+          "English",
+          "General Mathematics",
+          "Essential English",
+          "Essential Mathematics",
+          "Biology",
+          "Mathematical Methods",
+          "Chemistry",
+          "Sport and Recreation",
+          "Physics",
+          "Religion and Ethics"
+        ],
+        "name": "Subject: "
+      }
+    }
+  ],
+
+  "layer": [
+    {
+      "data": {
+        "url": "../data/queensland_regions.json",
+        "format": {
+          "type": "json",
+          "property": "features"
+        }
+      },
+
+      "mark": {
+        "type": "geoshape",
+        "fill": "#edf0f3",
+        "stroke": "#9eabb7",
+        "strokeWidth": 0.8
+      },
+
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "Education region"
+          }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "url": "../data/school_locations.json",
+        "format": {
+          "type": "json",
+          "property": "values"
+        }
+      },
+
+      "transform": [
+        {
+          "calculate": "datum[0]",
+          "as": "SchoolCode"
+        },
+        {
+          "calculate": "datum[1]",
+          "as": "Longitude"
+        },
+        {
+          "calculate": "datum[2]",
+          "as": "Latitude"
+        },
+        {
+          "lookup": "SchoolCode",
+          "from": {
+            "data": {
+              "url": "../data/qcaa_school_subjects_2025.csv",
+              "format": {
+                "type": "csv",
+                "parse": {
+                  "SchoolCode": "string"
+                }
+              }
+            },
+            "key": "SchoolCode",
+            "fields": [
+              "School",
+              "Region",
+              "Sector",
+              "English",
+              "GeneralMathematics",
+              "EssentialEnglish",
+              "EssentialMathematics",
+              "Biology",
+              "MathematicalMethods",
+              "Chemistry",
+              "SportRecreation",
+              "Physics",
+              "ReligionEthics"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[selectedSubject])",
+          "as": "Enrolment"
+        },
+        {
+          "filter": "isValid(datum.School) && isValid(datum.Enrolment) && datum.Enrolment > 0"
+        }
+      ],
+
+      "mark": {
+        "type": "circle",
+        "size": 34,
+        "opacity": 0.8,
+        "stroke": "white",
+        "strokeWidth": 0.5
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+
+        "color": {
+          "field": "Sector",
+          "type": "nominal",
+          "title": "School sector",
+          "scale": {
+            "domain": [
+              "Government",
+              "Catholic",
+              "Independent"
+            ],
+            "range": ["#0072B2", "#D55E00", "#6F4E7C"]
+          },
+          "legend": {
+            "orient": "bottom",
+            "direction": "horizontal"
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "School",
+            "type": "nominal",
+            "title": "School"
+          },
+          {
+            "field": "Region",
+            "type": "nominal",
+            "title": "Education region"
+          },
+          {
+            "field": "Sector",
+            "type": "nominal",
+            "title": "School sector"
+          },
+          {
+            "field": "Enrolment",
+            "type": "quantitative",
+            "title": "Unit 4 enrolments",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+
+  "config": {
+    "background": "white",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    }
+  }
+}

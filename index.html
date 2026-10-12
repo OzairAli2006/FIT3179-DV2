@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="[Your full name]">
+  <meta name="description"
+    content="Explore Australian Year 12 subject participation over time and compare senior subject enrolments across Queensland schools and regions.">
+
+  <title>Subject Choices in Senior Secondary School</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+
+<body>
+
+  <!-- Page introduction -->
+
+  <header class="page-header">
+    <div class="header-content">
+      <p class="header-label">
+        Australian Senior Secondary Education
+      </p>
+
+      <h1>Subject Choices in Senior Secondary School</h1>
+
+      <p class="header-subtitle">
+        What students study across Australia, with a closer look at Queensland.
+      </p>
+
+      <p class="header-description">
+        Which subjects are most popular, and how have enrolments changed
+        over time? This visualisation explores senior secondary subject
+        enrolments across Australia and compares male and female participation.
+        It then looks at individual subjects across Queensland schools
+        and education regions.
+      </p>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Section 1: The national picture -->
+
+    <section class="content-section">
+      <div class="section-header">
+        <p class="section-number">01</p>
+
+        <div>
+          <h2>What are students choosing?</h2>
+          <p>
+            Some learning areas attract more students than others. The national
+            picture for 2024 shows which areas are most popular, where male and
+            female participation differs, and which languages students study most.
+          </p>
+        </div>
+      </div>
+
+      <div class="charts-layout">
+        <article class="chart-box">
+          <div id="learning_area_popularity"></div>
+        </article>
+
+        <article class="chart-box">
+          <div id="learning_area_gender"></div>
+        </article>
+
+        <article class="chart-box full-width-chart">
+          <div id="language_treemap"></div>
+        </article>
+      </div>
+
+      <div class="section-summary">
+        <h3>What stands out?</h3>
+        <p>
+          English leads at 79.5%, followed by Mathematics at 67.0%.
+          Female participation is higher in six of the eight learning areas,
+          while male participation is higher in Mathematics and Technology.
+          Japanese, French and Chinese together account for 58.6% of
+          the language enrolments shown.
+        </p>
+      </div>
+      <p class="source-note">
+      Figures cover tertiary recognised subjects that can contribute towards
+      university admission. Students may appear in several learning areas,
+      so participation percentages do not add to 100%. The treemap shows
+      percentages of language enrolments.
+      </p>
+
+      <p class="source-note">
+        Source:
+        <a href="https://www.acara.edu.au/reporting/national-report-on-schooling-in-australia/year-12-subject-enrolments">
+          ACARA - Year 12 Subject Enrolments
+        </a>.
+      </p>
+    </section>
+
+    <!-- Section 2: Changes over time -->
+
+    <section class="content-section">
+      <div class="section-header">
+        <p class="section-number">02</p>
+
+        <div>
+          <h2>How have subject choices changed?</h2>
+          <p>
+            Subject choices change over time. Looking at enrolments across several
+            years shows which learning areas have gained or lost participation,
+            whether gender gaps have changed, and how language rankings have shifted.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-two-charts">
+        <article class="chart-box">
+          <div id="learning_area_trends"></div>
+        </article>
+
+        <article class="chart-box">
+          <div id="learning_area_comparison"></div>
+        </article>
+
+        <article class="chart-box full-width-section-chart">
+          <div id="gender_gap_heatmap"></div>
+        </article>
+
+        <article class="chart-box full-width-section-chart">
+          <div id="language_rankings"></div>
+        </article>
+      </div>
+
+      <div class="section-summary">
+        <h3>What stands out?</h3>
+        <p>
+          Participation is lower in 2024 than in 2010 across all eight
+          learning areas. Arts records the largest decrease, from 29.2%
+          to 20.7%, a fall of 8.5 percentage points. Female participation
+          remains higher in Arts, while male participation remains higher
+          in Technology and Mathematics. Japanese, French and Chinese
+          occupy the top three language positions throughout the period.
+        </p>
+      </div>
+      <p class="source-note">
+      The heatmap shows female minus male participation in percentage points
+      (pp). Positive values mean higher female participation, negative values
+      mean higher male participation.
+      </p>
+
+      <p class="source-note">
+        Source:
+        <a href="https://www.acara.edu.au/reporting/national-report-on-schooling-in-australia/year-12-subject-enrolments">
+          ACARA - Year 12 Subject Enrolments
+        </a>.
+      </p>
+    </section>
+
+    <!-- Section 3: Individual subjects in Queensland -->
+
+    <section class="content-section">
+      <div class="section-header">
+        <p class="section-number">03</p>
+
+        <div>
+          <h2>A closer look at Queensland</h2>
+          <p>
+            Broad learning areas tell only part of the story. A closer look at
+            Queensland's individual subjects shows which have the most enrolments
+            and how male and female enrolments differ across selected subjects.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-three-charts">
+        <article class="chart-box">
+          <div id="queensland_popular_subjects"></div>
+        </article>
+
+        <article class="chart-box">
+          <div id="subject_gender_comparison"></div>
+        </article>
+      </div>
+
+      <div class="section-summary">
+        <h3>What stands out?</h3>
+        <p>
+          English has the most Unit 4 enrolments at 27,822, followed by
+          General Mathematics at 21,381. Essential English and Essential
+          Mathematics each have around 20,000 enrolments.
+          Biology records more female than male enrolments, while Physics
+          and Sport and recreation record more male enrolments.
+        </p>
+      </div>
+
+      <p class="source-note">
+        These figures show enrolments in Unit 4, the final unit of a senior
+        subject, for the 2025 completion year. They count students enrolled
+        in each subject, not students who passed. Students taking several
+        subjects are counted once in each subject.
+      </p>
+      <p class="source-note">
+        Source:
+        <a href="https://www.qcaa.qld.edu.au/news-data/statistics/statistics-from-2020">
+          QCAA - Senior Subject Enrolment Data
+        </a>.
+      </p>
+    </section>
+
+    <!-- Section 4: Schools and regions in Queensland -->
+
+    <section class="content-section">
+      <div class="section-header">
+        <p class="section-number">04</p>
+
+        <div>
+          <h2>Does geography reveal another divide?</h2>
+          <p>
+            Large enrolment totals do not always mean a subject makes up a larger
+            proportion of local study. These maps explore where subjects are studied
+            across Queensland and compare regional totals with subject proportions.
+            Choose a subject using the dropdown below each map.
+          </p>
+        </div>
+      </div>
+
+      <div class="section-four-charts">
+        <article class="chart-box">
+          <div id="school_subject_locations"></div>
+        </article>
+
+        <article class="chart-box">
+          <div id="regional_enrolment_symbols"></div>
+        </article>
+
+        <article class="chart-box">
+          <div id="regional_subject_share"></div>
+        </article>
+      </div>
+
+      <div class="section-summary">
+        <h3>What stands out?</h3>
+        <p>
+          Many schools with recorded enrolments are located along the
+          south east coast and around regional centres.
+          With Biology selected, Metropolitan North and Metropolitan South
+          have the largest regional enrolment totals. North Queensland has
+          the highest Biology proportion. A region with more enrolments
+          does not necessarily have a higher subject proportion.
+        </p>
+      </div>
+
+      <p class="source-note">
+        Dots show school sites with recorded enrolments. Two schools without
+        matched coordinates are omitted from the dot map. Boundaries are
+        simplified, with offshore islands omitted and Norfolk Island excluded.
+      </p>
+
+      <p class="source-note">
+        Subject proportion is the selected subjects enrolments divided by all
+        recorded Unit 4 subject enrolments in the region, multiplied by 100.
+        This includes subjects outside the dropdown and measures enrolments,
+        not individual students. The colour scale changes with the selected subject.
+      </p>
+      <p class="source-note">
+        Sources:
+        <a href="https://www.qcaa.qld.edu.au/news-data/statistics/statistics-from-2020">
+          QCAA - Senior Subject Enrolment Data by School
+        </a>;
+        <a href="https://www.data.qld.gov.au/dataset/queensland-state-schools-geographic-information">
+          Queensland Government - Education Region Boundaries
+        </a>;
+        <a href="https://schoolsdirectory.eq.edu.au/">
+          Queensland Schools Directory
+        </a>;
+        <a href="https://spatial-gis.information.qld.gov.au/arcgis/rest/services/Society/SchoolsAndSchoolCatchments/MapServer">
+          Queensland School Locations
+        </a>;
+        <a href="https://www.data.qld.gov.au/dataset/state-and-non-state-school-details">
+          Archived School Details
+        </a>.
+      </p>
+    </section>
+
+  </main>
+
+  <!-- Author details and AI declaration -->
+
+  <footer class="page-footer">
+    <div class="footer-content">
+      <h3>About this visualisation</h3>
+
+      <p>
+        Created by Ozair Ali Mawjooth<br>
+        Date: 12 October 2026<br>
+      </p>
+
+      <h3>AI declaration</h3>
+
+      <p>
+        I used AI to assist with preparing data,
+        converting geographic data, developing and debugging chart and
+        website code, and revising descriptions and visual styling.
+        This included assistance with HTML, CSS, JavaScript, Vega and
+        Vega-Lite specifications.
+      </p>
+    </div>
+  </footer>
+
+  <script src="js/vega_lite.js"></script>
+
+</body>
+</html>

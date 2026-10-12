@@ -1,0 +1,121 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "How does subject participation differ by gender?",
+    "subtitle": "Male and female Unit 4 enrolments across selected Queensland subjects in 2025",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/qcaa_subject_gender_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Unit4Enrolment": "number"
+      }
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "datum.Gender == 'Female' ? datum.Unit4Enrolment : -datum.Unit4Enrolment",
+      "as": "GenderEnrolment"
+    }
+  ],
+
+  "width": 700,
+  "height": 380,
+
+  "mark": {
+    "type": "bar"
+  },
+
+  "encoding": {
+    "y": {
+      "field": "Subject",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "English",
+        "General Mathematics",
+        "Essential English",
+        "Essential Mathematics",
+        "Biology",
+        "Mathematical Methods",
+        "Chemistry",
+        "Sport & Recreation",
+        "Physics",
+        "Religion & Ethics"
+      ],
+      "axis": {
+        "labelFontSize": 11,
+        "labelLimit": 190
+      }
+    },
+
+    "x": {
+      "field": "GenderEnrolment",
+      "type": "quantitative",
+      "title": "Unit 4 enrolment",
+      "scale": {
+        "domain": [-16000, 16000]
+      },
+      "axis": {
+        "grid": true,
+        "gridColor": "#E6E6E6",
+        "labelFontSize": 11,
+        "titleFontSize": 12,
+        "labelExpr": "format(abs(datum.value), ',')"
+      }
+    },
+
+    "color": {
+      "field": "Gender",
+      "type": "nominal",
+      "title": "Gender",
+      "scale": {
+        "domain": ["Male", "Female"],
+        "range": ["#0072B2", "#D55E00"]
+      },
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Subject",
+        "type": "nominal",
+        "title": "Subject"
+      },
+      {
+        "field": "SubjectType",
+        "type": "nominal",
+        "title": "Subject type"
+      },
+      {
+        "field": "Gender",
+        "type": "nominal",
+        "title": "Gender"
+      },
+      {
+        "field": "Unit4Enrolment",
+        "type": "quantitative",
+        "title": "Unit 4 enrolment",
+        "format": ","
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

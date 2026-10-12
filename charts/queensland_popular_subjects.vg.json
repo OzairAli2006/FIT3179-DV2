@@ -1,0 +1,108 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Which senior subjects are most popular in Queensland?",
+    "subtitle": "Top 15 subjects by Unit 4 enrolment in 2025",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/qcaa_popular_subjects_2025.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Unit4Enrolment": "number"
+      }
+    }
+  },
+
+  "width": 700,
+  "height": 430,
+
+  "mark": {
+    "type": "bar",
+    "cornerRadiusEnd": 3
+  },
+
+  "encoding": {
+    "y": {
+      "field": "Subject",
+      "type": "nominal",
+      "title": null,
+      "sort": "-x",
+      "axis": {
+        "labelFontSize": 11,
+        "labelLimit": 190
+      }
+    },
+
+    "x": {
+      "field": "Unit4Enrolment",
+      "type": "quantitative",
+      "title": "Unit 4 enrolment",
+    
+      "scale": {
+        "domain": [0, 30000]
+      },
+  
+      "axis": {
+        "grid": true,
+        "gridColor": "#E6E6E6",
+        "labelFontSize": 11,
+        "titleFontSize": 12,
+        "format": ",d",
+        "values": [0, 5000, 10000, 15000, 20000, 25000, 30000]
+      }
+    },
+
+    "color": {
+      "field": "SubjectType",
+      "type": "nominal",
+      "title": "Subject type",
+      "scale": {
+        "domain": [
+          "GENERAL",
+          "APPLIED"
+        ],
+        "range": [
+          "#4F81BD",
+          "#E8953F"
+        ]
+      },
+      "legend": {
+        "orient": "top",
+        "direction": "horizontal",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Subject",
+        "type": "nominal",
+        "title": "Subject"
+      },
+      {
+        "field": "SubjectType",
+        "type": "nominal",
+        "title": "Subject type"
+      },
+      {
+        "field": "Unit4Enrolment",
+        "type": "quantitative",
+        "title": "Unit 4 enrolment",
+        "format": ","
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

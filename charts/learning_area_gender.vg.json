@@ -1,0 +1,167 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Do male and female students choose differently?",
+    "subtitle": "Year 12 participation by learning area and gender in 2024",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/acara_learning_area_gender_2024.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Male": "number",
+        "Female": "number"
+      }
+    }
+  },
+
+  "transform": [
+    {
+      "fold": ["Male", "Female"],
+      "as": ["Gender", "Participation"]
+    }
+  ],
+
+  "width": 340,
+  "height": 330,
+
+  "encoding": {
+    "y": {
+      "field": "LearningArea",
+      "type": "nominal",
+      "sort": [
+        "English",
+        "Mathematics",
+        "Society and Environment",
+        "Science",
+        "Technology",
+        "Health and Physical Education",
+        "Arts",
+        "Languages other than English"
+      ],
+      "title": null,
+      "axis": {
+        "labelFontSize": 12,
+        "labelLimit": 190,
+        "ticks": false,
+        "domain": false
+      }
+    },
+
+    "x": {
+      "field": "Participation",
+      "type": "quantitative",
+      "title": "Year 12 participation (%)",
+      "scale": {"domain": [0, 90]},
+      "axis": {
+        "grid": true,
+        "gridColor": "#E6E6E6",
+        "tickCount": 6,
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "transform": [
+        {
+          "pivot": "Gender",
+          "value": "Participation",
+          "groupby": ["LearningArea"]
+        }
+      ],
+
+      "mark": {
+        "type": "rule",
+        "strokeWidth": 3,
+        "color": "#BDBDBD"
+      },
+
+      "encoding": {
+        "x": {
+          "field": "Male",
+          "type": "quantitative"
+        },
+        "x2": {"field": "Female"}
+      }
+    },
+
+    {
+      "mark": {
+        "type": "point",
+        "filled": true,
+        "size": 130,
+        "opacity": 1
+      },
+
+      "encoding": {
+        "color": {
+          "field": "Gender",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Male", "Female"],
+            "range": ["#0072B2", "#D55E00"]
+          },
+          "legend": {
+            "title": null,
+            "orient": "top",
+            "direction": "horizontal",
+            "labelFontSize": 11
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "LearningArea",
+            "type": "nominal",
+            "title": "Learning area"
+          },
+          {
+            "field": "Gender",
+            "type": "nominal",
+            "title": "Gender"
+          },
+          {
+            "field": "Participation",
+            "type": "quantitative",
+            "title": "Participation (%)",
+            "format": ".1f"
+          }
+        ]
+      }
+    },
+
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "dy": {
+          "expr": "datum.Gender == 'Male' ? -14 : 14"
+        },
+        "fontSize": 10,
+        "color": "#333333"
+      },
+
+      "encoding": {
+        "text": {
+          "field": "Participation",
+          "type": "quantitative",
+          "format": ".1f"
+        },
+        "detail": {"field": "Gender"}
+      }
+    }
+  ],
+
+  "config": {
+    "view": {"stroke": null}
+  }
+}

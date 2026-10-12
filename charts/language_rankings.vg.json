@@ -1,0 +1,171 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "How have language rankings changed over time?",
+    "subtitle": [
+      "Year 12 language rankings between 2006 - 2024",
+      "Equal percentages receive equal ranks"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/acara_language_trends.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"Year": "number", "Share": "number"}
+    }
+  },
+
+  "transform": [
+    {
+      "window": [
+        {"op": "rank", "as": "Rank"}
+      ],
+      "sort": [
+        {"field": "Share", "order": "descending"}
+      ],
+      "groupby": ["Year"]
+    }
+  ],
+
+  "width": 700,
+  "height": 420,
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "quantitative",
+      "title": "Year",
+      "scale": {"domain": [2006, 2024]},
+      "axis": {
+        "format": "d",
+        "tickCount": 10,
+        "grid": false,
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "y": {
+      "field": "Rank",
+      "type": "quantitative",
+      "title": "Language rank",
+      "scale": {
+        "domain": [1, 10],
+        "reverse": true,
+        "zero": false
+      },
+      "axis": {
+        "values": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+        "grid": true,
+        "gridColor": "#E6E6E6",
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "quantitative",
+        "title": "Year",
+        "format": "d"
+      },
+      {
+        "field": "Language",
+        "type": "nominal",
+        "title": "Language"
+      },
+      {
+        "field": "Rank",
+        "type": "quantitative",
+        "title": "Rank",
+        "format": ".0f"
+      },
+      {
+        "field": "Share",
+        "type": "quantitative",
+        "title": "Language enrolments (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": {"filled": true, "size": 55},
+        "strokeWidth": 2
+      },
+
+      "encoding": {
+        "detail": {"field": "Language"},
+
+        "color": {
+          "field": "Language",
+          "type": "nominal",
+          "title": "Language",
+          "scale": {
+            "domain": [
+              "Japanese",
+              "French",
+              "Chinese",
+              "Italian",
+              "German",
+              "Spanish",
+              "Vietnamese",
+              "Indonesian",
+              "Arabic",
+              "Greek"
+            ],
+            "range": [
+              "#0072B2",
+              "#D55E00",
+              "#009E73",
+              "#CC79A7",
+              "#E69F00",
+              "#6F4E7C",
+              "#527A86",
+              "#8C564B",
+              "#333333",
+              "#7570B3"
+            ]
+          },
+          "legend": null
+        }
+      }
+    },
+
+    {
+      "transform": [
+        {"filter": "datum.Year == 2024"}
+      ],
+
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 10,
+        "fontSize": 11,
+        "color": "#333333"
+      },
+
+      "encoding": {
+        "text": {
+          "field": "Language",
+          "type": "nominal"
+        }
+      }
+    }
+  ],
+
+  "config": {
+    "font": "Arial",
+    "view": {"stroke": null}
+  }
+}

@@ -1,0 +1,170 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+
+  "width": 800,
+  "height": 420,
+  "padding": {"top": 55, "left": 5, "right": 5, "bottom": 5},
+  "autosize": "none",
+
+  "title": {
+    "text": "Which languages are most commonly studied?",
+    "subtitle": "Most commonly studied Year 12 languages in 2024",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": [
+    {
+      "name": "language_data",
+      "url": "../data/acara_language_2024.csv",
+      "format": {
+        "type": "csv",
+        "parse": {"Share": "number"}
+      },
+      "transform": [
+        {"type": "formula", "as": "id", "expr": "datum.Language"},
+        {"type": "formula", "as": "parent", "expr": "'root'"}
+      ]
+    },
+
+    {
+      "name": "root_data",
+      "values": [
+        {
+          "id": "root",
+          "parent": null,
+          "Language": "All Languages",
+          "Share": 0
+        }
+      ]
+    },
+
+    {
+      "name": "treemap_data",
+      "source": ["root_data", "language_data"],
+      "transform": [
+        {
+          "type": "stratify",
+          "key": "id",
+          "parentKey": "parent"
+        },
+        {
+          "type": "treemap",
+          "field": "Share",
+          "method": "squarify",
+          "round": true,
+          "padding": 2,
+          "size": [
+            {"signal": "width"},
+            {"signal": "height"}
+          ]
+        }
+      ]
+    },
+
+    {
+      "name": "language_leaves",
+      "source": "treemap_data",
+      "transform": [
+        {"type": "filter", "expr": "!datum.children"}
+      ]
+    }
+  ],
+
+  "scales": [
+    {
+      "name": "language_colour",
+      "type": "ordinal",
+      "domain": [
+        "Japanese",
+        "French",
+        "Chinese",
+        "Other",
+        "Italian",
+        "German",
+        "Spanish",
+        "Vietnamese",
+        "Indonesian",
+        "Arabic",
+        "Greek"
+      ],
+      "range": [
+        "#4C78A8",
+        "#F58518",
+        "#72B7B2",
+        "#54A24B",
+        "#E45756",
+        "#B279A2",
+        "#FF9DA6",
+        "#9D755D",
+        "#BAB0AC",
+        "#59A14F",
+        "#EDC948"
+      ]
+    }
+  ],
+
+  "marks": [
+    {
+      "type": "rect",
+      "from": {"data": "language_leaves"},
+      "encode": {
+        "enter": {
+          "x": {"field": "x0"},
+          "x2": {"field": "x1"},
+          "y": {"field": "y0"},
+          "y2": {"field": "y1"},
+          "fill": {
+            "scale": "language_colour",
+            "field": "Language"
+          },
+          "stroke": {"value": "white"},
+          "strokeWidth": {"value": 2},
+          "tooltip": {
+            "signal": "{'Language': datum.Language, 'Share (%)': format(datum.Share, '.1f')}"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {"data": "language_leaves"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "(datum.x0 + datum.x1) / 2"},
+          "y": {"signal": "(datum.y0 + datum.y1) / 2 - 7"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "text": {"field": "Language"},
+          "fontSize": {"value": 12},
+          "fontWeight": {"value": "bold"},
+          "fill": {
+            "signal": "indexof(['Japanese', 'Vietnamese'], datum.Language) >= 0 ? '#FFFFFF' : '#222222'"
+          }
+        }
+      }
+    },
+
+    {
+      "type": "text",
+      "from": {"data": "language_leaves"},
+      "encode": {
+        "enter": {
+          "x": {"signal": "(datum.x0 + datum.x1) / 2"},
+          "y": {"signal": "(datum.y0 + datum.y1) / 2 + 9"},
+          "align": {"value": "center"},
+          "baseline": {"value": "middle"},
+          "text": {
+            "signal": "format(datum.Share, '.1f') + '%'"
+          },
+          "fontSize": {"value": 11},
+          "fill": {
+            "signal": "indexof(['Japanese', 'Vietnamese'], datum.Language) >= 0 ? '#FFFFFF' : '#222222'"
+          }
+        }
+      }
+    }
+  ]
+}

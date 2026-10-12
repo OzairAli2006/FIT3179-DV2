@@ -1,0 +1,121 @@
+Year,LearningArea,Male,Female
+2010,English,80.2,86.9
+2010,Mathematics,75,68.3
+2010,Society and Environment,55.9,66
+2010,Science,49.6,53.1
+2010,Technology,41.1,28.1
+2010,Health and Physical Education,26.3,31.4
+2010,Arts,22.1,35.8
+2010,Languages other than English,8.6,13.8
+2011,English,78.5,86.2
+2011,Mathematics,76.3,69.5
+2011,Society and Environment,52.9,63.8
+2011,Science,49.3,52.7
+2011,Technology,42.5,29.4
+2011,Health and Physical Education,26.5,31.4
+2011,Arts,22.6,37.5
+2011,Languages other than English,8.3,13.2
+2012,English,76.4,85.5
+2012,Mathematics,76.2,69.8
+2012,Society and Environment,53.5,65.5
+2012,Science,48.9,52.3
+2012,Technology,42.5,29.5
+2012,Health and Physical Education,26.3,31
+2012,Arts,22.2,37.6
+2012,Languages other than English,8.4,13.4
+2013,English,75.2,84.5
+2013,Mathematics,75.4,69.6
+2013,Society and Environment,53,65.3
+2013,Science,48.5,52.6
+2013,Technology,42.4,28.7
+2013,Health and Physical Education,25.9,31.8
+2013,Arts,21.1,36.1
+2013,Languages other than English,7.9,13
+2014,English,74.5,84.4
+2014,Mathematics,74.5,69.6
+2014,Society and Environment,53.1,65.7
+2014,Science,49.7,54
+2014,Technology,41.9,28.4
+2014,Health and Physical Education,26.9,33.6
+2014,Arts,20.9,36
+2014,Languages other than English,7.7,12.8
+2015,English,73.3,83
+2015,Mathematics,73.8,69.1
+2015,Society and Environment,51.3,63.7
+2015,Science,48.8,54.4
+2015,Technology,41.8,27.6
+2015,Health and Physical Education,26.9,33.7
+2015,Arts,19.6,34.3
+2015,Languages other than English,7.7,12.6
+2016,English,72.8,82.6
+2016,Mathematics,73.2,68.8
+2016,Society and Environment,52,63.4
+2016,Science,48.7,55.9
+2016,Technology,40.9,26.8
+2016,Health and Physical Education,26.7,34.2
+2016,Arts,19.7,33.4
+2016,Languages other than English,7.6,12.7
+2017,English,72.3,82
+2017,Mathematics,73.8,69.3
+2017,Society and Environment,51.2,62.3
+2017,Science,49.1,56.2
+2017,Technology,39.4,26.3
+2017,Health and Physical Education,25.9,34
+2017,Arts,19.1,33
+2017,Languages other than English,7.8,12.8
+2018,English,72.1,82
+2018,Mathematics,74.1,70.2
+2018,Society and Environment,51,61.5
+2018,Science,48.4,56.9
+2018,Technology,38.1,24.4
+2018,Health and Physical Education,26,34.3
+2018,Arts,18.8,31.9
+2018,Languages other than English,7.9,12.4
+2019,English,72.2,81.5
+2019,Mathematics,73.5,68.9
+2019,Society and Environment,52.1,62.2
+2019,Science,46.9,56.2
+2019,Technology,39.1,24.3
+2019,Health and Physical Education,25.3,34.5
+2019,Arts,18.2,30.8
+2019,Languages other than English,7.7,12.7
+2020,English,68.5,78.7
+2020,Mathematics,68,64.7
+2020,Society and Environment,49.2,59
+2020,Science,44.6,54
+2020,Technology,36.1,22
+2020,Health and Physical Education,23.6,33.1
+2020,Arts,17,29.1
+2020,Languages other than English,7.3,11.5
+2021,English,71.8,80.8
+2021,Mathematics,69.9,65.7
+2021,Society and Environment,48.7,58.7
+2021,Science,45,54.8
+2021,Technology,35.1,21.3
+2021,Health and Physical Education,23,32.3
+2021,Arts,16.9,28
+2021,Languages other than English,6.5,10.6
+2022,English,71.9,80.1
+2022,Mathematics,70.3,65.6
+2022,Society and Environment,49.5,58.9
+2022,Science,45.4,55.3
+2022,Technology,34.8,21.8
+2022,Health and Physical Education,23,32.2
+2022,Arts,15.8,26.9
+2022,Languages other than English,6.4,9.8
+2023,English,72.3,80.1
+2023,Mathematics,70.9,65.1
+2023,Society and Environment,49.9,58.2
+2023,Science,45,54.6
+2023,Technology,34.2,21.9
+2023,Health and Physical Education,24.2,32
+2023,Arts,15.7,26.9
+2023,Languages other than English,6,9.2
+2024,English,75.9,82.8
+2024,Mathematics,70,64
+2024,Society and Environment,49.9,57
+2024,Science,43.7,53.1
+2024,Technology,33.6,22.4
+2024,Health and Physical Education,23.6,31.7
+2024,Arts,14.9,26.3
+2024,Languages other than English,5.9,9.1

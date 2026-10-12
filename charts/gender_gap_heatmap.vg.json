@@ -1,0 +1,125 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "How has the gender gap changed over time?",
+    "subtitle": "Difference in participation between female and male students between 2010 and 2024",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/acara_gender_gap_trends.csv",
+    "format": {
+      "type": "csv",
+      "parse": {
+        "Year": "number",
+        "Male": "number",
+        "Female": "number"
+      }
+    }
+  },
+
+  "transform": [
+    {
+      "calculate": "datum.Female - datum.Male",
+      "as": "GenderGap"
+    }
+  ],
+
+  "width": 750,
+  "height": 320,
+
+  "mark": {
+    "type": "rect"
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": "Year",
+      "sort": "ascending",
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "y": {
+      "field": "LearningArea",
+      "type": "nominal",
+      "title": null,
+      "sort": [
+        "English",
+        "Mathematics",
+        "Society and Environment",
+        "Science",
+        "Technology",
+        "Health and Physical Education",
+        "Arts",
+        "Languages other than English"
+      ],
+      "axis": {
+        "labelFontSize": 11,
+        "labelLimit": 210
+      }
+    },
+
+    "color": {
+      "field": "GenderGap",
+      "type": "quantitative",
+      "title": "Gender gap (pp)",
+      "scale": {
+        "domain": [-16, 16],
+        "domainMid": 0,
+        "scheme": "redblue",
+        "reverse": true
+      },
+      "legend": {
+        "orient": "right",
+        "titleFontSize": 12,
+        "labelFontSize": 11
+      }
+    },
+
+    "tooltip": [
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "LearningArea",
+        "type": "nominal",
+        "title": "Learning area"
+      },
+      {
+        "field": "Male",
+        "type": "quantitative",
+        "title": "Male (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "Female",
+        "type": "quantitative",
+        "title": "Female (%)",
+        "format": ".1f"
+      },
+      {
+        "field": "GenderGap",
+        "type": "quantitative",
+        "title": "Female − Male (percentage points)",
+        "format": "+.1f"
+      }
+    ]
+  },
+
+  "config": {
+    "view": {
+      "stroke": null
+    }
+  }
+}

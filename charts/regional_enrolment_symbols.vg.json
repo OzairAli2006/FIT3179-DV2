@@ -1,0 +1,193 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Where Are Enrolments Largest?",
+    "subtitle": [
+      "Queensland Unit 4 enrolments by education region in 2025",
+      "Circle size represents enrolments in the selected subject"
+    ],
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "width": 420,
+  "height": 500,
+
+  "projection": {
+    "type": "conicEqualArea",
+    "parallels": [-10, -28],
+    "rotate": [-145, 0, 0]
+  },
+
+  "params": [
+    {
+      "name": "selectedSubject",
+      "value": "Biology",
+      "bind": {
+        "input": "select",
+        "options": [
+          "English",
+          "GeneralMathematics",
+          "EssentialEnglish",
+          "EssentialMathematics",
+          "Biology",
+          "MathematicalMethods",
+          "Chemistry",
+          "SportRecreation",
+          "Physics",
+          "ReligionEthics"
+        ],
+        "labels": [
+          "English",
+          "General Mathematics",
+          "Essential English",
+          "Essential Mathematics",
+          "Biology",
+          "Mathematical Methods",
+          "Chemistry",
+          "Sport and Recreation",
+          "Physics",
+          "Religion and Ethics"
+        ],
+        "name": "Subject: "
+      }
+    }
+  ],
+
+  "data": {
+    "url": "../data/queensland_regions.json",
+    "format": {
+      "type": "json",
+      "property": "features"
+    }
+  },
+
+  "layer": [
+    {
+      "mark": {
+        "type": "geoshape",
+        "fill": "#f1f3f5",
+        "stroke": "#9eabb7",
+        "strokeWidth": 0.8
+      },
+
+      "encoding": {
+        "tooltip": [
+          {
+            "field": "properties.name",
+            "type": "nominal",
+            "title": "Education region"
+          }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "calculate": "datum.properties.name",
+          "as": "Region"
+        },
+        {
+          "calculate": "datum.properties.centroid_lon",
+          "as": "Longitude"
+        },
+        {
+          "calculate": "datum.properties.centroid_lat",
+          "as": "Latitude"
+        },
+        {
+          "lookup": "Region",
+          "from": {
+            "data": {
+              "url": "../data/qcaa_region_subjects_2025.csv",
+              "format": {
+                "type": "csv"
+              }
+            },
+            "key": "Region",
+            "fields": [
+              "EnglishEnrolment",
+              "GeneralMathematicsEnrolment",
+              "EssentialEnglishEnrolment",
+              "EssentialMathematicsEnrolment",
+              "BiologyEnrolment",
+              "MathematicalMethodsEnrolment",
+              "ChemistryEnrolment",
+              "SportRecreationEnrolment",
+              "PhysicsEnrolment",
+              "ReligionEthicsEnrolment"
+            ]
+          }
+        },
+        {
+          "calculate": "toNumber(datum[selectedSubject + 'Enrolment'])",
+          "as": "Enrolment"
+        },
+        {
+          "filter": "isValid(datum.Enrolment) && datum.Enrolment > 0"
+        }
+      ],
+
+      "mark": {
+        "type": "circle",
+        "opacity": 0.72,
+        "color": "#d95f76",
+        "stroke": "#8d3045",
+        "strokeWidth": 1
+      },
+
+      "encoding": {
+        "longitude": {
+          "field": "Longitude",
+          "type": "quantitative"
+        },
+
+        "latitude": {
+          "field": "Latitude",
+          "type": "quantitative"
+        },
+
+        "size": {
+          "field": "Enrolment",
+          "type": "quantitative",
+          "title": "Unit 4 enrolments",
+          "scale": {
+            "type": "linear",
+            "zero": true,
+            "range": [0, 1800]
+          },
+          "legend": {
+            "orient": "bottom",
+            "labelFontSize": 11,
+            "titleFontSize": 12
+          }
+        },
+
+        "tooltip": [
+          {
+            "field": "Region",
+            "type": "nominal",
+            "title": "Education region"
+          },
+          {
+            "field": "Enrolment",
+            "type": "quantitative",
+            "title": "Unit 4 enrolments",
+            "format": ","
+          }
+        ]
+      }
+    }
+  ],
+
+  "config": {
+    "background": "white",
+    "font": "Arial",
+    "view": {
+      "stroke": null
+    }
+  }
+}

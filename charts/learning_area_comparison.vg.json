@@ -1,0 +1,122 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+  "title": {
+    "text": "Which learning areas changed the most?",
+    "subtitle": "Year 12 participation in 2010 compared with 2024",
+    "anchor": "start",
+    "fontSize": 18,
+    "subtitleFontSize": 13
+  },
+
+  "data": {
+    "url": "../data/acara_learning_area_trends.csv",
+    "format": {
+      "type": "csv",
+      "parse": {"Year": "number", "Participation": "number"}
+    }
+  },
+
+  "transform": [
+    {"filter": "datum.Year == 2010 || datum.Year == 2024"}
+  ],
+
+  "width": 400,
+  "height": 310,
+
+  "mark": {
+    "type": "line",
+    "point": {"filled": true, "size": 120},
+    "strokeWidth": 2
+  },
+
+  "encoding": {
+    "x": {
+      "field": "Year",
+      "type": "ordinal",
+      "title": null,
+      "sort": [2010, 2024],
+      "axis": {
+        "labelAngle": 0,
+        "labelFontSize": 13,
+        "ticks": false,
+        "domain": false
+      }
+    },
+
+    "y": {
+      "field": "Participation",
+      "type": "quantitative",
+      "title": "Year 12 participation (%)",
+      "scale": {"domain": [0, 90]},
+      "axis": {
+        "grid": true,
+        "gridColor": "#E6E6E6",
+        "tickCount": 6,
+        "labelFontSize": 11,
+        "titleFontSize": 12
+      }
+    },
+
+    "color": {
+      "field": "LearningArea",
+      "type": "nominal",
+      "title": "Learning area",
+      "scale": {
+        "domain": [
+          "English",
+          "Mathematics",
+          "Society and Environment",
+          "Science",
+          "Technology",
+          "Health and Physical Education",
+          "Arts",
+          "Languages other than English"
+        ],
+        "range": [
+          "#0072B2",
+          "#D55E00",
+          "#009E73",
+          "#CC79A7",
+          "#E69F00",
+          "#6F4E7C",
+          "#333333",
+          "#527A86"
+        ]
+      },
+      "legend": {
+        "orient": "bottom",
+        "columns": 2,
+        "labelFontSize": 10,
+        "titleFontSize": 11,
+        "labelLimit": 200
+      }
+    },
+
+    "detail": {"field": "LearningArea"},
+
+    "tooltip": [
+      {
+        "field": "LearningArea",
+        "type": "nominal",
+        "title": "Learning area"
+      },
+      {
+        "field": "Year",
+        "type": "ordinal",
+        "title": "Year"
+      },
+      {
+        "field": "Participation",
+        "type": "quantitative",
+        "title": "Participation (%)",
+        "format": ".1f"
+      }
+    ]
+  },
+
+  "config": {
+    "font": "Arial",
+    "view": {"stroke": null}
+  }
+}
